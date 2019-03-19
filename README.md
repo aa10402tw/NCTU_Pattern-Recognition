@@ -1,6 +1,6 @@
 # NCTU_Pattern_Recognition
 
-There are three major part of this repository : [Classifier](#Classifier), [Embedding (dimension reduction)](#Embedding) and [Clustering](#Clustering). 
+There are three major part of this repository : [Classifier](#Classifier), [Embedding](#Embedding)(dimension reduction) and [Clustering](#Clustering). 
 
 ## Classifier 
 In Classifier folder, we implement several classifiers from scratch (using python3).
