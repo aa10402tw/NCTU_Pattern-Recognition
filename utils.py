@@ -1,3 +1,5 @@
+import numpy as np
+
 def split_data(X, y, split_ratio=0.8):
     N = X.shape[0]
     num_train = int(N * split_ratio)

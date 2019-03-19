@@ -1,3 +1,5 @@
+from utils import *
+
 # IRIS dataset
 def read_dataset_IRIS(file_path='./datasets/iris.data'):
     xs = []
