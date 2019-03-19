@@ -36,7 +36,7 @@ class NaiveBayesClassifier():
             Y_pred.append(y_pred)
         return np.array(Y_pred)
 
-    def get_discriminant_functions(self):
+    def get_discriminant_function(self):
         pass
 
 
