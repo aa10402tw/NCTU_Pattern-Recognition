@@ -1,6 +1,6 @@
 # NCTU_Pattern_Recognition
 
-There are three major part of this repository : [Classifier](## Classifier), [Dimension Reduction](## Dimension Reduction) and [Clustering](## Clustering). 
+There are three major part of this repository : [Classifier](## Classifier), [Dimension Reduction](##Dimension Reduction) and [Clustering](##Clustering). 
 
 ## Classifier 
 In Classifier folder, we implement several classifiers from scratch (using python3).
