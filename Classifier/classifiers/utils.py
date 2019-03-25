@@ -41,3 +41,24 @@ def log_gaussian_pdf(x, mean, std):
     variance = std**2
     exp_term = -(pow(x - mean, 2) / (2 * variance))
     return log(1 / (sqrt(2 * pi) * std)) + exp_term
+
+## probability density function for Mulitvariate Gaussian
+def multivariate_gaussian_pdf(x, mean, cov):
+    from math import exp, sqrt, log, pi
+    from numpy.linalg import inv, det
+    x = x.reshpae(-1,1)
+    mean = mean.reshape(-1,1)
+    n = mean.shape[0]
+    exp_term = -(1/2) * (x-mean).T.dot(inv(cov)).dot(x-mean)
+    const_term = 1/((2*pi)**(n/2)*(det(cov)**(1/2)))
+    return const_term * np.asscalar(np.exp(exp_term))
+
+def log_multivariate_gaussian_pdf(x, mean, cov):
+    from math import exp, sqrt, log, pi
+    from numpy.linalg import inv, det
+    x = x.reshape(-1,1)
+    mean = mean.reshape(-1,1)
+    n = mean.shape[0]
+    exp_term = -(1/2) * (x-mean).T.dot(inv(cov)).dot(x-mean)
+    const_term = 1/((2*pi)**(n/2)*(det(cov)**(1/2)))
+    return np.log(const_term) + np.asscalar(exp_term)

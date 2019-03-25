@@ -1,7 +1,7 @@
 from utils import *
 
 # IRIS dataset
-def read_dataset_IRIS(file_path='./datasets/iris.data'):
+def read_dataset_Iris(file_path='./datasets/iris.data'):
     xs = []
     labels = []
     with open(file_path) as f:

@@ -5,46 +5,55 @@ from utils import *
 from datasets import *
 import classifiers
 from classifiers.NaiveBayes import *
+from classifiers.Bayesian import *
+from classifiers.Perceptron import *
+
+def train_and_test_model(model, X, y, dataset_name='', verbose=True):
+    if verbose:
+        print('='*40 + "\n(Dataset: {}) \n(Classifier: {})\n".format(dataset_name, str(model)) + '-'*40)
+    X, y = read_dataset_BreastCancer()
+    (X_train, y_train), (X_test, y_test) = split_data(X, y, split_ratio=0.9)
+    model = model.fit(X_train, y_train)
+
+    y_pred = model.predict(X_train)
+    train_acc = accuracy(y_train, y_pred)
+    if verbose:
+        print('Train Accuracy: %.2f %%' % (train_acc * 100))
+
+    y_pred = model.predict(X_test)
+    test_acc = accuracy(y_test, y_pred)
+    if verbose:
+        print('Test Accuracy:  %.2f %%' % (test_acc * 100))
+        print('='*40)
+    return train_acc, test_acc
+
 
 # BreastCancer (binary-classes classification)
-print('='*20 + "\n(Dataset: {}) \n(Classifier: {})\n".format("BreastCancer", "NaiveBayes") + '-'*20)
 X, y = read_dataset_BreastCancer()
-(X_train, y_train), (X_test, y_test) = split_data(X, y, split_ratio=0.9)
+
 model = NaiveBayesClassifier()
-model = model.fit(X_train, y_train)
+train_and_test_model(model, X, y, "BreastCancer")
 
-y_pred = model.predict(X_train)
-print('Train Accuracy: %.2f %%' % (accuracy(y_train, y_pred) * 100))
-y_pred = model.predict(X_test)
-print('Test Accuracy: %.2f %%' % (accuracy(y_test, y_pred) * 100))
-print('='*20)
+model = BaysianClassifier()
+train_and_test_model(model, X, y, "BreastCancer")
 
+model = PerceptronClassifier()
+train_and_test_model(model, X, y, "BreastCancer")
 
 # Iris (3-classes classification)
-print('\n')
-print('='*20 + "\n(Dataset: {}) \n(Classifier: {})\n".format("Iris", "NaiveBayes") + '-'*20)
-X, y = read_dataset_IRIS()
-(X_train, y_train), (X_test, y_test) = split_data(X, y)
+X, y = read_dataset_Iris()
 model = NaiveBayesClassifier()
-model = model.fit(X_train, y_train)
+train_and_test_model(model, X, y, "Iris")
 
-y_pred = model.predict(X_train)
-print('Train Accuracy: %.2f %%' % (accuracy(y_train, y_pred) * 100))
-y_pred = model.predict(X_test)
-print('Test Accuracy: %.2f %%' % (accuracy(y_test, y_pred) * 100))
-print('='*20)
+model = BaysianClassifier()
+train_and_test_model(model, X, y, "Iris")
 
 
 # Glass (3-classes classification)
-print('\n')
-print('='*20 + "\n(Dataset: {}) \n(Classifier: {})\n".format("Glass", "NaiveBayes") + '-'*20)
 X, y = read_dataset_Glass()
-(X_train, y_train), (X_test, y_test) = split_data(X, y)
 model = NaiveBayesClassifier()
-model = model.fit(X_train, y_train)
+train_and_test_model(model, X, y, "Glass")
 
-y_pred = model.predict(X_train)
-print('Train Accuracy: %.2f %%' % (accuracy(y_train, y_pred) * 100))
-y_pred = model.predict(X_test)
-print('Test Accuracy: %.2f %%' % (accuracy(y_test, y_pred) * 100))
-print('='*20)
+model = BaysianClassifier()
+train_and_test_model(model, X, y, "Glass")
+

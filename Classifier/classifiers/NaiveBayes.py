@@ -39,6 +39,9 @@ class NaiveBayesClassifier():
     def get_discriminant_function(self):
         pass
 
+    def __str__(self):
+        return "NaiveBayesClassifier"
+
 
 def test_NaiveBayes():
     
