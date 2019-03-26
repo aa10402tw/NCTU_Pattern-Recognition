@@ -3,10 +3,8 @@ import matplotlib.pyplot as plt
 
 from utils import *
 from datasets import *
-import classifiers
-from classifiers.NaiveBayes import *
-from classifiers.Bayesian import *
-from classifiers.Perceptron import *
+from classifiers import *
+from metrics import *
 
 def train_and_test_model(model, X, y, dataset_name='', verbose=True):
     if verbose:
@@ -27,33 +25,51 @@ def train_and_test_model(model, X, y, dataset_name='', verbose=True):
         print('='*40)
     return train_acc, test_acc
 
+datasets = ['BreastCancer', 'Banknote']
+models = [BayesianClassifier(), NaiveBayesClassifier()]
 
-# BreastCancer (binary-classes classification)
-X, y = read_dataset_BreastCancer()
+n_figures = len(datasets)
+plt.figure(figsize=(5*n_figures, 5))
 
-model = NaiveBayesClassifier()
-train_and_test_model(model, X, y, "BreastCancer")
-
-model = BaysianClassifier()
-train_and_test_model(model, X, y, "BreastCancer")
-
-model = PerceptronClassifier()
-train_and_test_model(model, X, y, "BreastCancer")
-
-# Iris (3-classes classification)
-X, y = read_dataset_Iris()
-model = NaiveBayesClassifier()
-train_and_test_model(model, X, y, "Iris")
-
-model = BaysianClassifier()
-train_and_test_model(model, X, y, "Iris")
+for i, dataset in enumerate(datasets):
+    plt.subplot(1, n_figures, i+1)
+    X, y = read_dataset(dataset=dataset)
+    (X_train, y_train), (X_test, y_test) = split_data(X, y, split_ratio=0.5)
+    for model in models:
+        model = model.fit(X_train, y_train)
+        y_pred_prob = model.predict_prob(X_test)
+        y_pred_prob = y_pred_prob[:, 1].reshape(-1)
+        FPR, TPR = ROC(y_test, y_pred_prob, label=str(model))
+        plt.title(dataset)
+plt.show()
 
 
-# Glass (3-classes classification)
-X, y = read_dataset_Glass()
-model = NaiveBayesClassifier()
-train_and_test_model(model, X, y, "Glass")
+# # BreastCancer (binary-classes classification)
+# X, y = read_dataset_BreastCancer()
 
-model = BaysianClassifier()
-train_and_test_model(model, X, y, "Glass")
+# model = NaiveBayesClassifier()
+# train_and_test_model(model, X, y, "BreastCancer")
+
+# model = BaysianClassifier()
+# train_and_test_model(model, X, y, "BreastCancer")
+
+# model = PerceptronClassifier()
+# train_and_test_model(model, X, y, "BreastCancer")
+
+# # Iris (3-classes classification)
+# X, y = read_dataset_Iris()
+# model = NaiveBayesClassifier()
+# train_and_test_model(model, X, y, "Iris")
+
+# model = BaysianClassifier()
+# train_and_test_model(model, X, y, "Iris")
+
+
+# # Glass (3-classes classification)
+# X, y = read_dataset_Glass()
+# model = NaiveBayesClassifier()
+# train_and_test_model(model, X, y, "Glass")
+
+# model = BaysianClassifier()
+# train_and_test_model(model, X, y, "Glass")
 

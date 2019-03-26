@@ -1,7 +1,7 @@
 import numpy as np
 from utils import *
 
-class BaysianClassifier():
+class BayesianClassifier():
     def __init__(self):
         pass
     
@@ -39,6 +39,20 @@ class BaysianClassifier():
             y_pred = np.argmax(log_posteriors)
             Y_pred.append(y_pred)
         return np.array(Y_pred)
+
+    def predict_prob(self, X):
+        num_classes, num_featrues = self.means.shape
+        log_priors = np.log(self.priors)
+        Y_pred_prob = []
+        for x in X:
+            log_likelihoods = np.zeros(num_classes)
+            for c in range(num_classes):
+                mean, cov = self.means[c], self.covs[c]
+                log_likelihoods[c] += log_multivariate_gaussian_pdf(x, mean, cov)
+            log_posteriors = log_priors + log_likelihoods
+            y_pred_prob = np.exp(log_posteriors)
+            Y_pred_prob.append(y_pred_prob/np.sum(y_pred_prob))
+        return np.array(Y_pred_prob)
 
     def get_discriminant_function(self):
         pass

@@ -1,5 +1,22 @@
 from utils import *
 
+
+def lower(s):
+    return s.lower()
+
+def read_dataset(dataset='None'):
+
+    if lower(dataset) == lower('Iris'):
+        return  read_dataset_Iris()
+    elif lower(dataset) == lower('Glass'):
+        return  read_dataset_Glass()
+    elif lower(dataset) == lower('BreastCancer'):
+        return  read_dataset_BreastCancer()
+    elif lower(dataset) == lower('Banknote'):
+        return  read_dataset_Banknote()
+    else:
+        raise Excption('No such dataset to load %s'%dataset)
+
 # IRIS dataset
 def read_dataset_Iris(file_path='./datasets/iris.data'):
     xs = []
@@ -29,6 +46,24 @@ def read_dataset_BreastCancer(csv_path='./datasets/BreastCancer.csv'):
 
 # Glass dataset
 def read_dataset_Glass(file_path='datasets/glass.data'):
+    xs = []
+    labels = []
+    with open(file_path) as f:
+        lines = f.readlines()
+        for line in lines:
+            datas = line.split('\n')[0].split(',')
+            if len(datas) < 3:
+                break
+            x = [float(feature) for feature in datas[1:-1]]
+            label = datas[-1]
+            xs.append(x)
+            labels.append(label)
+    X = np.array(xs)
+    y = to_numerical(labels)
+    return X, y
+
+# Bank Note Dataset
+def read_dataset_Banknote(file_path='datasets/data_banknote_authentication.txt'):
     xs = []
     labels = []
     with open(file_path) as f:
