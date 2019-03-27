@@ -5,7 +5,10 @@ def lower(s):
     return s.lower()
 
 def read_dataset(dataset='None'):
-
+    if lower(dataset) == lower('Wine'):
+        return read_dataset_Wine()
+    if lower(dataset) == lower('ionosphere'):
+        return read_dataset_ionosphere()
     if lower(dataset) == lower('Iris'):
         return  read_dataset_Iris()
     elif lower(dataset) == lower('Glass'):
@@ -16,6 +19,42 @@ def read_dataset(dataset='None'):
         return  read_dataset_Banknote()
     else:
         raise Excption('No such dataset to load %s'%dataset)
+
+def read_dataset_Wine(file_path='./datasets/wine.data'):
+    xs = []
+    labels = []
+    with open(file_path) as f:
+        lines = f.readlines()
+        for line in lines:
+            datas = line.split('\n')[0].split(',')
+            if len(datas) < 3:
+                break
+            x = [float(feature) for feature in datas[1:]]
+            label = datas[0]
+            xs.append(x)
+            labels.append(label)
+    X = np.array(xs)
+    y = to_numerical(labels)
+    return X, y
+
+
+
+def read_dataset_ionosphere(file_path='./datasets/ionosphere.data'):
+    xs = []
+    labels = []
+    with open(file_path) as f:
+        lines = f.readlines()
+        for line in lines:
+            datas = line.split('\n')[0].split(',')
+            if len(datas) < 3:
+                break
+            x = [float(feature) for feature in datas[:-1]]
+            label = datas[-1]
+            xs.append(x)
+            labels.append(label)
+    X = np.array(xs)
+    y = to_numerical(labels)
+    return X, y
 
 # IRIS dataset
 def read_dataset_Iris(file_path='./datasets/iris.data'):

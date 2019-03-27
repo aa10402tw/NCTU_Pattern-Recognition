@@ -10,8 +10,8 @@ and we have implemented functions for read some datasets, includeing Iris, Glass
 
 Completed classifiers:
 - [x] NaiveBayes
-- [ ] Bayesian
-- [ ] Peceptron
+- [x] Bayesian
+- [x] Peceptron
 
 ## Embedding
 to be continued...

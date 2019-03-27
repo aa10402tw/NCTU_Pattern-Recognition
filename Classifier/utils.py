@@ -45,7 +45,7 @@ def log_gaussian_pdf(x, mean, std):
 ## probability density function for Mulitvariate Gaussian
 def multivariate_gaussian_pdf(x, mean, cov):
     from math import exp, sqrt, log, pi
-    from numpy.linalg import inv, det
+    from numpy.linalg import inv, det, pinv
     x = x.reshpae(-1,1)
     mean = mean.reshape(-1,1)
     n = mean.shape[0]
@@ -55,7 +55,7 @@ def multivariate_gaussian_pdf(x, mean, cov):
 
 def log_multivariate_gaussian_pdf(x, mean, cov):
     from math import exp, sqrt, log, pi
-    from numpy.linalg import inv, det
+    from numpy.linalg import inv, det, pinv
     x = x.reshape(-1,1)
     mean = mean.reshape(-1,1)
     n = mean.shape[0]
