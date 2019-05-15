@@ -13,8 +13,10 @@ Completed classifiers:
 - [x] Bayesian
 - [x] Peceptron
 
-## Embedding
-to be continued...
+## Dimension-Reduction
+- [x] Linear Discriminant Analysis (LDA)
+- [x] Principal components analysis (PCA)
+- [x] EigenFace
 
 ## Clustering 
 to be continued...
