@@ -19,4 +19,5 @@ Completed classifiers:
 - [x] EigenFace
 
 ## Clustering 
-to be continued...
+- [x] Agglomerative Clustering
+- [x] DBSCAN
