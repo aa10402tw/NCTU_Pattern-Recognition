@@ -1,4 +1,4 @@
-# NCTU_Pattern_Recognition
+# NCTU_Pattern-Recognition
 
 There are three major part of this repository : [Classifier](#Classifier), [Embedding](#Embedding)(dimension reduction) and [Clustering](#Clustering). 
 
